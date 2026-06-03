@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEO AI</title>
+</head>
+<body>
+    <h1>SEO AI Tool</h1>
+
+    <input id="url" placeholder="Enter URL">
+    <button onclick="analyze()">Analyze</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        async function analyze() {
+            const url = document.getElementById("url").value;
+
+            const res = await fetch("http://localhost:8000/analyze", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ url })
+            });
+
+            const data = await res.json();
+            document.getElementById("output").innerText =
+                JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
